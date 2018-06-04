@@ -1,9 +1,18 @@
 from django import forms
 from .models import Group
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 
 # ===
 # App forms
 # ===
+
+class SignUpForm(UserCreationForm):
+
+    class Meta:
+        model=User
+        fields=('username', 'password1', 'password2',)
 
 class GroupCreate(forms.ModelForm):
     class Meta:
@@ -18,10 +27,6 @@ class GroupCreate(forms.ModelForm):
 # ===
 # Auth
 # ===
-
-class SignupForm(forms.Form):
-    username = forms.CharField(label="User Name", max_length=64)
-    password = forms.CharField(widget=forms.PasswordInput())
 
 class LoginForm(forms.Form):
     username = forms.CharField(label="User Name", max_length=64)
