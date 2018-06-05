@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<h1>Create Group</h1>
+<form method="POST" action="/groups/create/">
+  {% csrf_token %}
+  {{ form.as_table}}
+  <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

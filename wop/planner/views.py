@@ -4,10 +4,11 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views import generic
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .forms import LoginForm
+from .forms import LoginForm, GroupCreate
 from .models import Group, Profile, Activity
 from wop.planner.forms import SignUpForm
 from django.template import loader
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -34,7 +35,20 @@ class GroupsView(generic.ListView):
     def get_queryset(self):
         return Group.objects.order_by('-pub_date')
 
+def groups_form(request):
+    form = GroupCreate
+    return render(request, 'groups_form.html', {'form':form})
 
+def groups_create(request):
+    form = GroupCreate(request.POST)
+    print('POSTING to groups_create')
+    if form.is_valid():
+        group = form.save(commit=False)
+        # group.users = request.user
+        group.save()
+    else:
+        print('form was invalid')
+    return HttpResponseRedirect('/groups/')
 # ===
 # AUTH
 # ===
@@ -49,7 +63,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)
-            return redirect('index')
+            return redirect('profile')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})

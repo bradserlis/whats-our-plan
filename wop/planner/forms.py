@@ -8,17 +8,11 @@ from django.contrib.auth.models import User
 # App forms
 # ===
 
-class SignUpForm(UserCreationForm):
-
-    class Meta:
-        model=User
-        fields=('username', 'password1', 'password2',)
-
 class GroupCreate(forms.ModelForm):
     class Meta:
         model=Group
         fields=('name', 'description')
-        success_url = ''
+        success_url = '/groups'
         
 # class ActivityCreate(forms.ModelForm):
 #     class Meta:
@@ -28,6 +22,12 @@ class GroupCreate(forms.ModelForm):
 # ===
 # Auth
 # ===
+
+class SignUpForm(UserCreationForm):
+
+    class Meta:
+        model=User
+        fields=('username', 'password1', 'password2',)
 
 class LoginForm(forms.Form):
     username = forms.CharField(label="Username", max_length=64)
