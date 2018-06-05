@@ -42,12 +42,11 @@ class Group(models.Model):
     def __str__(self):
         return self.name
 
-
 # another claass
 
-# class User_Group(models.Model):
-#     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-#     group = models.ManyToManyField(Group)
+class User_Group(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    group = models.ManyToManyField(Group)
 
 # class Activity_Group(models.Model):
 #     group = models.ManyToManyField(Group, on_delete=models.CASCADE)

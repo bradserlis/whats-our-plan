@@ -27,9 +27,10 @@ def index(request):
 #         return Group.objects.order_by('name')[:5]
 
 
-def profile(request, username):
-    user = Profile.objects.get(username=user)
+def profile(request):
+    user = Profile.objects.get(user=request.user)
     groups = Group.objects.filter(users=user)
+    print(groups)
     return render(request, 'profile.html', {'groups':groups })
 
 
@@ -73,11 +74,16 @@ def login_view(request):
                     print('user is active')
                     login(request, user)
                     print('logged in?????', request.user)
-                    return HttpResponseRedirect('/')
+                    return HttpResponseRedirect('/profile')
                 else:
                     print("The account has been disabled.")
+                    return HttpResponseRedirect('/login')
             else:
                 print("The username and/or password is incorrect.")
+                return HttpResponseRedirect('/login')
+        else:
+            print('INVALID FORM')
+            return HttpResponseRedirect('/login')
     else:
         print('login get method')
         form = LoginForm()

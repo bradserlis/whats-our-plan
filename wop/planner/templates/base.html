@@ -12,7 +12,7 @@
     <nav>
       <div class="nav-wrapper">
         {% if request.user.is_authenticated %}
-        <a href="/" class="brand-logo">{{ user.username }}</a>
+        <a href="/profile" class="brand-logo">{{ user.username }}</a>
               {% endif %}
         <ul class="right hide-on-med-and-down">
           <li><a href="sass.html">Sass</a></li>

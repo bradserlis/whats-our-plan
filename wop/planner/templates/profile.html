@@ -4,7 +4,8 @@
     {% if groups %}
     <ul>
     {% for group in groups %}
-      <li><a href="#">{{ user.groups.name }}</a></li>
+      <li><a href="#">{{group.id}}: {{ group.name }}</a></li>
+      <p>{{group.description}}</p>
     {% endfor %}
     </ul>
     {% else %}
