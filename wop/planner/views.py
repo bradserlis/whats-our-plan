@@ -67,10 +67,8 @@ def login_view(request):
                     return HttpResponseRedirect('/')
                 else:
                     print("The account has been disabled.")
-                    return HttpResponseRedirect('/login')
             else:
                 print("The username and/or password is incorrect.")
-                return HttpResponseRedirect('/login')
     else:
         print('login get method')
         form = LoginForm()

@@ -29,6 +29,6 @@ class GroupCreate(forms.ModelForm):
 # ===
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label="User Name", max_length=64)
-    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(label="Username", max_length=64)
+    password = forms.CharField(label="Password", widget=forms.PasswordInput())
 
