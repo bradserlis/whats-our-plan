@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from .forms import LoginForm
 from .models import Group, Profile
 from wop.planner.forms import SignUpForm
+from django.template import loader
+
 
 # Create your views here.
 
@@ -17,11 +19,18 @@ def index(request):
     # form= ()
     return render(request, 'index.html', {'user_loggedin': not request.user.is_anonymous})
 
+# class ProfileView(generic.ListView):
+#     template_name = 'ProfileView.html'
+#     context_object_name = 'groups'
+
+#     def get_queryset(self):
+#         return Group.objects.order_by('name')[:5]
+
 
 def profile(request, username):
-    user = User.objects.get(username=username)
-    groups = Group.objects.filter(user=user)
-    return render(request, 'profile.html', {'username':username, 'groups':groups })
+    user = Profile.objects.get(username=user)
+    groups = Group.objects.filter(users=user)
+    return render(request, 'profile.html', {'groups':groups })
 
 
 # ===
