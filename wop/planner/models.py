@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    groups = models.ManyToManyField('Group', blank=False)
+    groups = models.ManyToManyField('Group', blank=False, through='User_Group')
 
     def __str__(self):
         return self.user.username
@@ -19,7 +19,7 @@ def update_user_profile(sender, instance, created, **kwargs):
 class Group(models.Model):
     name= models.CharField(max_length=50)
     description = models.TextField()
-    users = models.ManyToManyField('Profile', blank=False)
+    users = models.ManyToManyField('Profile', blank=False, through='User_Group')
     pub_date = models.DateTimeField(auto_now_add=True)
 
 
@@ -28,7 +28,7 @@ class Group(models.Model):
 
 class User_Group(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    group = models.ManyToManyField(Group)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
 # class Activity_Group(models.Model):
 #     group = models.ManyToManyField(Group, on_delete=models.CASCADE)

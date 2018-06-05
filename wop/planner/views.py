@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import LoginForm, GroupCreate
-from .models import Group, Profile, Activity
+from .models import Group, Profile, Activity, User_Group
 from wop.planner.forms import SignUpForm
 from django.template import loader
 from django.urls import reverse_lazy
@@ -40,15 +40,25 @@ def groups_form(request):
     return render(request, 'groups_form.html', {'form':form})
 
 def groups_create(request):
-    form = GroupCreate(request.POST)
-    print('POSTING to groups_create')
-    if form.is_valid():
-        group = form.save(commit=False)
-        # group.users = request.user
-        group.save()
+    if request.user.is_authenticated:
+        form = GroupCreate(request.POST)
+        if form.is_valid():
+            group = form.save(commit=False)
+            user = (request.user)
+            group.save()
+
+            # Warning: ONLY do if user not already in group
+            user_group = User_Group()
+            user_group.group = group
+            user_group.user = user.profile
+            user_group.save()
+            return HttpResponseRedirect('/groups/')
+        else:
+            print('form was invalid')
+            return render(request, 'groups_form.html', {'form':form})
+        
     else:
-        print('form was invalid')
-    return HttpResponseRedirect('/groups/')
+        return HttpResponse('go away')
 # ===
 # AUTH
 # ===
