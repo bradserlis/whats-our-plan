@@ -1,15 +1,25 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
     {% block content %}
+    <h2>Groups</h2>
+    <a href="/groups"><button class="waves-effect waves-light btn">Join Group</button></a>
     {% if groups %}
     <ul>
     {% for group in groups %}
-      <li><a href="#">{{group.id}}: {{ group.name }}</a></li>
+      <li><a href="#"><h4>{{ group.name }}</h4></a></li>
       <p>{{group.description}}</p>
     {% endfor %}
     </ul>
+
+    <h2>Upcoming Activities</h2>
+    <ul>
+        {% for a in activities %}
+            <li>{{ a.title }}</li>
+        {% endfor %}
+    </ul>
+
     {% else %}
-    <p>No polls are available.</p>
+    <p>You got no data</p>
     {% endif %}
 
     {% endblock %}

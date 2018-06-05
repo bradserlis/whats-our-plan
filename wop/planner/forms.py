@@ -19,6 +19,7 @@ class GroupCreate(forms.ModelForm):
         model=Group
         fields=('name', 'description')
         success_url = ''
+        
 # class ActivityCreate(forms.ModelForm):
 #     class Meta:
 #         model=Activity

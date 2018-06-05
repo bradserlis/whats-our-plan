@@ -1,7 +1,18 @@
-{% extends 'base.html' %}
-{% load staticfiles %}
-    {% block content %}
-<h1>Zaboomafoo eats butter chicken</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WOP</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'title.css' %}">
+</head>
+<body>
+    <h1>WOP</h1>
+    <h2>"What's Our Plan?"</h2>
 
+    <h4>Making spontaneous meetups more fun</h4>
 
-    {% endblock %}
+    <button class="waves-effect waves-light btn-large"><a href="/signup">SIGN UP</a></button>
+    <button class="waves-effect waves-light btn-large"><a href="/login">LOG IN</a></button>
+</body>
+</html>

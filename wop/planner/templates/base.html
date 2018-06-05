@@ -15,12 +15,11 @@
         <a href="/profile" class="brand-logo">{{ user.username }}</a>
               {% endif %}
         <ul class="right hide-on-med-and-down">
-          <li><a href="sass.html">Sass</a></li>
-          <li><a href="badges.html">Components</a></li>
       {% if request.user.is_authenticated %}
        <li><a  href="{% url 'logout' %}">Logout</a></li> 
       {% else %}
         <li><a  href="{% url 'login' %}">Login</a></li>
+        <li><a  href="{% url 'signup' %}">Sign Up</a></li>
       {% endif %}
         </ul>
       </div>

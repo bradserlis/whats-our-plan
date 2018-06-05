@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import LoginForm
-from .models import Group, Profile
+from .models import Group, Profile, Activity
 from wop.planner.forms import SignUpForm
 from django.template import loader
 
@@ -19,19 +19,20 @@ def index(request):
     # form= ()
     return render(request, 'index.html', {'user_loggedin': not request.user.is_anonymous})
 
-# class ProfileView(generic.ListView):
-#     template_name = 'ProfileView.html'
-#     context_object_name = 'groups'
-
-#     def get_queryset(self):
-#         return Group.objects.order_by('name')[:5]
-
 
 def profile(request):
     user = Profile.objects.get(user=request.user)
     groups = Group.objects.filter(users=user)
-    print(groups)
-    return render(request, 'profile.html', {'groups':groups })
+    activities = Activity.objects.filter(group__in=groups)
+    print(activities)
+    return render(request, 'profile.html', {'groups':groups, 'activities': activities })
+
+class GroupsView(generic.ListView):
+    template_name = 'groups.html'
+    context_object_name = 'groups' 
+
+    def get_queryset(self):
+        return Group.objects.order_by('-pub_date')
 
 
 # ===
