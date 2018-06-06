@@ -1,5 +1,5 @@
 from django import forms
-from .models import Group
+from .models import Group, Activity
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -14,10 +14,11 @@ class GroupCreate(forms.ModelForm):
         fields=('name', 'description')
         success_url = '/groups'
         
-# class ActivityCreate(forms.ModelForm):
-#     class Meta:
-#         model=Activity
-#         fields = ('title', 'description')
+class ActivityCreate(forms.ModelForm):
+    class Meta:
+        model=Activity
+        fields = ('title', 'description')
+        success_url = '/profile'
 
 # ===
 # Auth

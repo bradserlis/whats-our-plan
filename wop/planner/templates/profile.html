@@ -8,13 +8,14 @@
     {% for group in groups %}
       <li><a href="/groups/{{group.id}}"><h4>{{ group.name }}</h4></a></li>
       <p>{{group.description}}</p>
-    {% endfor %}
-    </ul>
-
-    <h2>Upcoming Activities</h2>
-    <ul>
         {% for a in activities %}
-            <li>{{ a.title }}</li>
+        {% if group.id == a.group_id %}
+            <h3>{{ a.title }}</h3>
+            <p>{{ a.description }}</p>
+
+        {% endif %}
+    {% endfor %}
+      
         {% endfor %}
     </ul>
 

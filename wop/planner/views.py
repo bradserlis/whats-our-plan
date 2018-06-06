@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views import generic
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .forms import LoginForm, GroupCreate
+from .forms import LoginForm, GroupCreate, ActivityCreate
 from .models import Group, Profile, Activity, User_Group
 from wop.planner.forms import SignUpForm
 from django.template import loader
@@ -29,6 +29,32 @@ def profile(request):
     return render(request, 'profile.html', {'groups':groups, 'activities': activities })
 
 # ===
+# Activity
+# ===
+
+# def activity_form(request, pk):
+#     form = ActivityCreate
+#     return render(request, 'acitivity_form.html', {'form':form})
+
+def activity_create(request, pk):
+    if request.user.is_authenticated:
+        form = ActivityCreate(request.POST)
+        if form.is_valid():
+            activity = form.save(commit=False)
+            group = Group.objects.get(id=pk)
+            print('group is:', group)
+            activity.group = group
+            print('activity.group is:', activity.group)
+            activity.save()
+            return HttpResponseRedirect('/profile/')
+        else:
+            print('form was invalid')
+            return render(request, 'groups_form.html', {'form':form})
+        
+    else:
+        return HttpResponse('go away')
+
+# ===
 # Groups
 # ===
 
@@ -48,11 +74,12 @@ class GroupsView(generic.ListView):
 def groups_detail(request, pk):
     groups = Group.objects.get(id=pk)
     activities = None
+    form = ActivityCreate
     try:
         activities=Activity.objects.get(group_id = groups)
     except:
         pass
-    return render(request, "groups_detail.html", {'group':groups, 'activities': activities})
+    return render(request, "groups_detail.html", {'group':groups, 'activities': activities, 'form':form})
 
 
 def groups_form(request):

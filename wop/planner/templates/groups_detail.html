@@ -12,9 +12,9 @@
       <h5>{{ activities.title }}</h5>
       <p>{{ activities.description }}</p>
     {% endif %}
-    <!-- <form action="_post/" method="post"> -->
+    <form action="/groups/{{group.id}}/activities/create" method="post">
     {% csrf_token %}
-    <!-- {{ .as_table }} -->
+    {{ form.as_table }}
     <input type="submit" value="Add an Activity">
   </form>
 {% endblock %}
