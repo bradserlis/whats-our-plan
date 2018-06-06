@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ group.name }}{% endblock %}
+
+{% block content %}
+  <h2>{{ group.name }}</h2>
+  {{ group.description }}
+    {% csrf_token %}
+
+    <h4>Your Activity:</h4>
+      <h5>{{ activity.title }}</h5>
+      {{ activity.description }}
+    <form action="clown_post/" method="post">
+    {% csrf_token %}
+    {{ clownform.as_table }}
+    <input type="submit" value="Add a Clown">
+  </form>
+{% endblock %}
