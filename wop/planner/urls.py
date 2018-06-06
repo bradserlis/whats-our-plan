@@ -8,7 +8,7 @@ from . import views
 urlpatterns=[
     path('', views.index, name='index'),
     path('profile/', views.profile, name='profile'),
-    path('groups/', views.GroupsView.as_view(), name="groups"),
+    path('groups/', views.groups_list, name="groups_list"),
     path('groups/form/', views.groups_form, name="groups_form"),
     path('groups/create/', views.groups_create, name="groups_create"),
     path('groups/<int:pk>/', views.groups_detail),

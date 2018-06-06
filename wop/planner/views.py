@@ -32,6 +32,19 @@ def profile(request):
 # Groups
 # ===
 
+def groups_list(request):
+    user = Profile.objects.get(user=request.user)
+    groups = Group.objects.exclude(users=user)
+    return render(request, 'groups_list.html', {'groups':groups})
+
+
+class GroupsView(generic.ListView):
+    template_name = 'groups.html'
+    context_object_name = 'groups' 
+
+    def get_queryset(self):
+        return Group.objects.order_by('-pub_date')
+
 def groups_detail(request, pk):
     groups = Group.objects.get(id=pk)
     activities = None
@@ -41,12 +54,6 @@ def groups_detail(request, pk):
         pass
     return render(request, "groups_detail.html", {'group':groups, 'activities': activities})
 
-class GroupsView(generic.ListView):
-    template_name = 'groups.html'
-    context_object_name = 'groups' 
-
-    def get_queryset(self):
-        return Group.objects.order_by('-pub_date')
 
 def groups_form(request):
     form = GroupCreate
