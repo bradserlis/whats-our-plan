@@ -8,8 +8,10 @@
     {% csrf_token %}
 
     <h4>Your Activity:</h4>
+    {% if activities %}
       <h5>{{ activities.title }}</h5>
       <p>{{ activities.description }}</p>
+    {% endif %}
     <!-- <form action="_post/" method="post"> -->
     {% csrf_token %}
     <!-- {{ .as_table }} -->

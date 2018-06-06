@@ -34,7 +34,11 @@ def profile(request):
 
 def groups_detail(request, pk):
     groups = Group.objects.get(id=pk)
-    activities = Activity.objects.get(group_id = groups)
+    activities = None
+    try:
+        activities=Activity.objects.get(group_id = groups)
+    except:
+        pass
     return render(request, "groups_detail.html", {'group':groups, 'activities': activities})
 
 class GroupsView(generic.ListView):
