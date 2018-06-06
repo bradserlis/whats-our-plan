@@ -8,11 +8,11 @@
     {% csrf_token %}
 
     <h4>Your Activity:</h4>
-      <h5>{{ activity.title }}</h5>
-      {{ activity.description }}
-    <form action="clown_post/" method="post">
+      <h5>{{ activities.title }}</h5>
+      <p>{{ activities.description }}</p>
+    <!-- <form action="_post/" method="post"> -->
     {% csrf_token %}
-    {{ clownform.as_table }}
-    <input type="submit" value="Add a Clown">
+    <!-- {{ .as_table }} -->
+    <input type="submit" value="Add an Activity">
   </form>
 {% endblock %}

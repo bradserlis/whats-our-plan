@@ -11,6 +11,7 @@ urlpatterns=[
     path('groups/', views.GroupsView.as_view(), name="groups"),
     path('groups/form/', views.groups_form, name="groups_form"),
     path('groups/create/', views.groups_create, name="groups_create"),
+    path('groups/<int:pk>/', views.groups_detail),
     # path('user/<username>/', views.profile, name="profile"),
     path('signup/', views.signup, name='signup'),
     path('login/', views.login_view, name="login"),

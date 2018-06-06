@@ -5,7 +5,7 @@
 {% if groups %}
     <ul>
     {% for group in groups %}
-<li><a href="#"><h4>{{ group.name }}</h4></a></li>
+<li><a href="/groups/{{group.id}}"><h4>{{ group.name }}</h4></a></li>
       <p>{{group.description}}</p>
 
     {% endfor %}

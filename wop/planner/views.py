@@ -28,6 +28,15 @@ def profile(request):
     print(activities)
     return render(request, 'profile.html', {'groups':groups, 'activities': activities })
 
+# ===
+# Groups
+# ===
+
+def groups_detail(request, pk):
+    groups = Group.objects.get(id=pk)
+    activities = Activity.objects.get(group_id = groups)
+    return render(request, "groups_detail.html", {'group':groups, 'activities': activities})
+
 class GroupsView(generic.ListView):
     template_name = 'groups.html'
     context_object_name = 'groups' 
