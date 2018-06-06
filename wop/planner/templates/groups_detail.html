@@ -5,9 +5,7 @@
 {% block content %}
   <h2>{{ group.name }}</h2>
   {{ group.description }}
-    {% csrf_token %}
-
-    <h4>Your Activity:</h4>
+      <h4>Your Activities:</h4>
     {% if activities %}
       <h5>{{ activities.title }}</h5>
       <p>{{ activities.description }}</p>

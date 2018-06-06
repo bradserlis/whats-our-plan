@@ -10,8 +10,10 @@
       <p>{{group.description}}</p>
         {% for a in activities %}
         {% if group.id == a.group_id %}
-            <h3>{{ a.title }}</h3>
-            <p>{{ a.description }}</p>
+        <h4>Activities:</h4>
+            <p><span style="font-weight: 500">{{ a.title }}</span></p>
+            <p><span style="font-size: .75em">{{ a.description }}</span></p>
+            <hr>
 
         {% endif %}
     {% endfor %}
