@@ -15,10 +15,6 @@ import random
 # Create your views here.
 
 def index(request):
-    # print('user is', request.user)
-    # user = User.objects.get(username=username)
-    # groups = Group.objects.filter(user=user)
-    # form= ()
     return render(request, 'index.html', {'user_loggedin': not request.user.is_anonymous})
 
 
@@ -32,10 +28,6 @@ def profile(request):
 # ===
 # Activity
 # ===
-
-# def activity_form(request, pk):
-#     form = ActivityCreate
-#     return render(request, 'acitivity_form.html', {'form':form})
 
 def get_random_activity(request, pk):
     print('pk is', pk)
@@ -106,19 +98,40 @@ class GroupsView(generic.ListView):
         return Group.objects.order_by('-pub_date')
 
 def groups_detail(request, pk):
-    groups = Group.objects.get(id=pk)
+    group = Group.objects.get(id=pk)
+    group_users = User_Group.objects.filter(group=group).values()
+    print('group_users:', group_users)
+    person_in_group = False
+
+    for person in group_users:
+        print('person', person, 'user id', request.user.id)
+        if person['user_id'] == request.user.id:
+            person_in_group = True
+
     activities = None
     form = ActivityCreate
     try:
-        activities = Activity.objects.filter(group_id=groups).values()
+        activities = Activity.objects.filter(group_id=group).values()
         print(activities)
     except:
         pass
         print('it passed')
-        print('it knew it was this group:', groups)
+        print('it knew it was this group:', group)
         print(activities)
-    return render(request, "groups_detail.html", {'groups':groups, 'activities': activities, 'form':form})
+    return render(request, "groups_detail.html", {'group':group, 'activities': activities, 'form':form, 'person_in_group': person_in_group})
 
+def groups_join(request, pk):
+    group = Group.objects.get(id=pk)
+    print('this is that group', group)
+    user = (request.user)
+    print('this is that user', user)
+    user_group = User_Group()
+    print('this is the user_group', User_Group)
+    user_group.group = group
+    user_group.user = user.profile
+    print('this is user_group right before saved', user_group)
+    user_group.save()
+    return HttpResponseRedirect('/groups/')
 
 def groups_form(request):
     form = GroupCreate

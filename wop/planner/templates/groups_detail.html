@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}{{ groups.name }}{% endblock %}
+{% block title %}{{ group.name }}{% endblock %}
 
 {% block content %}
-  <h2>{{ groups.name }}</h2>
-  {{ groups.description }}
+  <h2>{{ group.name }}</h2>
+  {{ group.description }}
+      {% if person_in_group %}
       <h4>Your Next Activity:</h4>
           {% for a in activities %}
       {%if a.is_chosen%}
@@ -13,7 +14,7 @@
       {% endfor %}
       <hr>
 
-      <a href="/groups/{{groups.id}}/activities/set"><button class="waves-effect waves-light btn">Set A New Activity</button></a>
+      <a href="/groups/{{group.id}}/activities/set"><button class="waves-effect waves-light btn">Set A New Activity</button></a>
       <h4>What Your Group Does:</h4>
     {% for a in activities %}
 
@@ -21,9 +22,12 @@
       <p>{{ a.description }}</p>
       <p>{{ a.is_chosen }}</p>
       {% endfor %}
-    <form action="/groups/{{groups.id}}/activities/create" method="post">
-    {% csrf_token %}
-    {{ form.as_table }}
-    <input type="submit" value="Add an Activity">
-  </form>
+        <form action="/groups/{{group.id}}/activities/create" method="post">
+          {% csrf_token %}
+          {{ form.as_table }}
+          <input type="submit" value="Add an Activity">
+        </form>
+      {% else %}
+      <a href="/groups/{{group.id}}/join"><button class="waves-effect waves-light btn">JOIN THIS GROUP!</button></a>
+      {% endif %}
 {% endblock %}
