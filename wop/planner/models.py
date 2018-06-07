@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import random
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -39,9 +40,16 @@ class Activity(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     group = models.ForeignKey(Group, on_delete=models.CASCADE, blank=True, default=1)
+    is_chosen = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
     
     class Meta:
         ordering = ('title',)
+    
+    def get_length(self):
+        return len(self.contents)
+
+
+

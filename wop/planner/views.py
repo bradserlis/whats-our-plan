@@ -9,6 +9,7 @@ from .models import Group, Profile, Activity, User_Group
 from wop.planner.forms import SignUpForm
 from django.template import loader
 from django.urls import reverse_lazy
+import random
 
 
 # Create your views here.
@@ -35,6 +36,40 @@ def profile(request):
 # def activity_form(request, pk):
 #     form = ActivityCreate
 #     return render(request, 'acitivity_form.html', {'form':form})
+
+def get_random_activity(request, pk):
+    print('pk is', pk)
+    group = Group.objects.get(id=pk)
+    print('group is', group)
+    pool = Activity.objects.filter(group_id=group).values().exclude(is_chosen=True)
+    reset_pool = Activity.objects.get(group_id=group, is_chosen=True)
+    print('here is the reset_pool', reset_pool)
+    reset_pool.is_chosen = False
+    print('here is the reset_pool...reset...', reset_pool)
+    reset_pool.save(update_fields=['is_chosen'])
+    print('pool is', pool)
+    new_pool = []
+    for id in pool:
+        new_pool.append(id['id'])
+    print('pool after running for in', new_pool)
+    # without_last_chosen = pool.exclude(is_chosen == True)
+    # print(without_last_chosen)
+    temp_selected_index = random.randint(0, len(new_pool)-1)
+    print('the range is:', len(pool))
+    print('selected index is', temp_selected_index)
+    print('the chosen one is', new_pool[temp_selected_index])
+    selected_index = new_pool[temp_selected_index]
+    # return new_pool[selected_index]
+    selected_activity = Activity.objects.get(id=selected_index)
+    # selected_activity = list(Activity.objects.filter(id=selected_index).values()) ###
+    print('selected_activity before changing to TRUE', selected_activity)
+    selected_activity.is_chosen = True
+    # selected_activity[0]['is_chosen'] = True
+    print('made it TRUE', selected_activity)
+    selected_activity.save(update_fields=['is_chosen'])
+    # print('selected_activity after changing is_chosen', selected_activity)
+    return HttpResponseRedirect('/profile/')
+
 
 def activity_create(request, pk):
     if request.user.is_authenticated:
@@ -63,7 +98,6 @@ def groups_list(request):
     groups = Group.objects.exclude(users=user)
     return render(request, 'groups_list.html', {'groups':groups})
 
-
 class GroupsView(generic.ListView):
     template_name = 'groups.html'
     context_object_name = 'groups' 
@@ -76,10 +110,14 @@ def groups_detail(request, pk):
     activities = None
     form = ActivityCreate
     try:
-        activities=Activity.objects.get(group_id = groups)
+        activities = Activity.objects.filter(group_id=groups).values()
+        print(activities)
     except:
         pass
-    return render(request, "groups_detail.html", {'group':groups, 'activities': activities, 'form':form})
+        print('it passed')
+        print('it knew it was this group:', groups)
+        print(activities)
+    return render(request, "groups_detail.html", {'groups':groups, 'activities': activities, 'form':form})
 
 
 def groups_form(request):

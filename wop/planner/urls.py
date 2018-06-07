@@ -13,6 +13,7 @@ urlpatterns=[
     path('groups/create/', views.groups_create, name="groups_create"),
     path('groups/<int:pk>/', views.groups_detail),
     path('groups/<int:pk>/activities/create', views.activity_create),
+    path('groups/<int:pk>/activities/set', views.get_random_activity),
     # path('user/<username>/', views.profile, name="profile"),
     path('signup/', views.signup, name='signup'),
     path('login/', views.login_view, name="login"),

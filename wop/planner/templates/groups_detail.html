@@ -1,16 +1,27 @@
 {% extends "base.html" %}
 
-{% block title %}{{ group.name }}{% endblock %}
+{% block title %}{{ groups.name }}{% endblock %}
 
 {% block content %}
-  <h2>{{ group.name }}</h2>
-  {{ group.description }}
-      <h4>Your Activities:</h4>
-    {% if activities %}
-      <h5>{{ activities.title }}</h5>
-      <p>{{ activities.description }}</p>
-    {% endif %}
-    <form action="/groups/{{group.id}}/activities/create" method="post">
+  <h2>{{ groups.name }}</h2>
+  {{ groups.description }}
+      <h4>Your Next Activity:</h4>
+          {% for a in activities %}
+      {%if a.is_chosen%}
+      <p>{{ a.title }}</p>
+      {% endif %}
+      {% endfor %}
+      <hr>
+
+      <a href="/groups/{{groups.id}}/activities/set"><button class="waves-effect waves-light btn">Set A New Activity</button></a>
+      <h4>What Your Group Does:</h4>
+    {% for a in activities %}
+
+      <h5>{{ a.title }}</h5>
+      <p>{{ a.description }}</p>
+      <p>{{ a.is_chosen }}</p>
+      {% endfor %}
+    <form action="/groups/{{groups.id}}/activities/create" method="post">
     {% csrf_token %}
     {{ form.as_table }}
     <input type="submit" value="Add an Activity">
