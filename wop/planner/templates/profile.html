@@ -5,16 +5,20 @@
     <a href="/groups"><button class="waves-effect waves-light btn">Join Group</button></a>
     {% if groups %}
     {% for group in groups %}
-    <div class="card-panel hoverable">
-    <ul>
-      <li><a href="/groups/{{group.id}}"><h4>{{ group.name }}</h4></a></li>
-      <p>{{group.description}}</p>
-        <h4>Activities:</h4>
-        {% for a in activities %}
-        {% if group.id == a.group_id and a.is_chosen %}
-            <p><span style="font-weight: 500">{{ a.title }}</span></p>
-            <p><span style="font-size: .75em">{{ a.description }}</span></p>
-            <hr>
+    <div class="card-panel hoverable profile-card col s12">
+        <div class="col s6">
+        <ul>
+          <li><a href="/groups/{{group.id}}"><h4>{{ group.name }}</h4></a></li>
+          <p>{{group.description}}</p>
+        </div>
+        <div class="col s6">
+            <h4>Activities:</h4>
+            {% for a in activities %}
+            {% if group.id == a.group_id and a.is_chosen %}
+                <p><span style="font-weight: 500">{{ a.title }}</span></p>
+                <p><span style="font-size: .75em">{{ a.description }}</span></p>
+                <hr>
+        </div>    
     </div>
         {% endif %}
     {% endfor %}

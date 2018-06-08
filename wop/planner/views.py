@@ -110,7 +110,7 @@ def groups_detail(request, pk):
         activities = Activity.objects.filter(group_id=group).values()
         print(activities)
     except:
-        pass
+        
         print('it passed')
         print('it knew it was this group:', group)
         print(activities)

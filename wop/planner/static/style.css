@@ -1,12 +1,26 @@
+/*font-family: 'Poor Story', cursive;
+font-family: 'Advent Pro', sans-serif;
+*/
+
+
 .waves-effect{
     background-color:#7450fe;
 }
 
 nav{
-    background-color: #2E0094;
+    background: linear-gradient(to right, #400096 0%, #000099 100%); 
+    /*#2E0094;*/
 }
 
 body {
   background: url('background.png');
+  font-family: 'Poor Story', cursive;
 }
 
+p{
+
+}
+
+.profile-card{
+font-family: 'Advent Pro', sans-serif;
+}
