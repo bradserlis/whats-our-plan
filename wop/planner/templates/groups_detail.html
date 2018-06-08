@@ -8,7 +8,10 @@
       {% if person_in_group %}
       <h2>People in this group</h2>
       {% for person in users%}
-      <p>{{person.username}}
+      <ul class='collection'>
+        <li></li>
+        <li class='collection-item'>{{person.username}}</li>
+      </ul>
         {%endfor%}
       <h4>Your Next Activity:</h4>
           {% for a in activities %}
