@@ -31,23 +31,15 @@ def profile(request):
 
 def get_random_activity(request, pk):
     reset_pool= None
-    print('pk is', pk)
     group = Group.objects.get(id=pk)
-    print('group is', group)
     pool = Activity.objects.filter(group_id=group).values().exclude(is_chosen=True)
     try: 
         reset_pool = Activity.objects.get(group_id=group, is_chosen=True)
-        print('it passed')
     except:
         pass
-        print('except')
-
-    # print('pool looks like this:', pool.count())
-    # print('reset_pool looks like this:', type(reset_pool))
     if reset_pool and pool.count()==0:
-        return HttpResponseRedirect('/profile/')
+        return HttpResponseRedirect('/groups/%s' % pk)
     elif pool.count()>=1 and not reset_pool:
-        print('1 false, 0 true')
         new_pool = []
         for id in pool:
             new_pool.append(id['id'])
@@ -56,34 +48,17 @@ def get_random_activity(request, pk):
         selected_activity.is_chosen=True
         selected_activity.save(update_fields=['is_chosen'])
         # return HttpResponseRedirect('/groups/'pk)
-        return HttpResponseRedirect('/profile')
-
-    print('here is the reset_pool', reset_pool)
+        return HttpResponseRedirect('/groups/%s' % pk)
     reset_pool.is_chosen = False
-    print('here is the reset_pool...reset...', reset_pool)
     reset_pool.save(update_fields=['is_chosen'])
-    print('pool is', pool)
     new_pool = []
     for id in pool:
         new_pool.append(id['id'])
-    print('pool after running for in', new_pool)
-    # without_last_chosen = pool.exclude(is_chosen == True)
-    # print(without_last_chosen)
     temp_selected_index = random.randint(0, len(new_pool)-1)
-    print('the range is:', len(pool))
-    print('selected index is', temp_selected_index)
-    print('the chosen one is', new_pool[temp_selected_index])
     selected_index = new_pool[temp_selected_index]
-    # return new_pool[selected_index]
     selected_activity = Activity.objects.get(id=selected_index)
-    # selected_activity = list(Activity.objects.filter(id=selected_index).values()) ###
-    print('selected_activity before changing to TRUE', selected_activity)
     selected_activity.is_chosen = True
-    # selected_activity[0]['is_chosen'] = True
-    print('made it TRUE', selected_activity)
     selected_activity.save(update_fields=['is_chosen'])
-    # print('selected_activity after changing is_chosen', selected_activity)
-    # return HttpResponseRedirect('/groups/'pk)
     return HttpResponseRedirect('/groups/%s' % pk)
 
 
@@ -93,15 +68,12 @@ def activity_create(request, pk):
         if form.is_valid():
             activity = form.save(commit=False)
             group = Group.objects.get(id=pk)
-            print('group is:', group)
             activity.group = group
-            print('activity.group is:', activity.group)
             activity.save()
-            return HttpResponseRedirect('/profile/')
+            return HttpResponseRedirect('/groups/%s' %pk)
         else:
             print('form was invalid')
-            return render(request, 'groups_form.html', {'form':form})
-        
+            return render(request, 'groups_form.html', {'form':form})        
     else:
         return HttpResponse('go away')
 
@@ -155,7 +127,7 @@ def groups_join(request, pk):
     user_group.user = user.profile
     print('this is user_group right before saved', user_group)
     user_group.save()
-    return HttpResponseRedirect('/groups/')
+    return HttpResponseRedirect('/groups/%s' %pk)
 
 def groups_form(request):
     form = GroupCreate

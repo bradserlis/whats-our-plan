@@ -5,3 +5,8 @@
 nav{
     background-color: #2E0094;
 }
+
+body {
+  background: url('background.png');
+}
+

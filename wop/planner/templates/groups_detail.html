@@ -25,7 +25,7 @@
         <form action="/groups/{{group.id}}/activities/create" method="post">
           {% csrf_token %}
           {{ form.as_table }}
-          <input type="submit" value="Add an Activity">
+          <button class="waves-effect waves-light btn" type="submit">Add New Activity</button>
         </form>
       {% else %}
       <a href="/groups/{{group.id}}/join"><button class="waves-effect waves-light btn">JOIN THIS GROUP!</button></a>

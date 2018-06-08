@@ -4,17 +4,18 @@
     <h2>Your Groups</h2>
     <a href="/groups"><button class="waves-effect waves-light btn">Join Group</button></a>
     {% if groups %}
-    <ul>
     {% for group in groups %}
+    <div class="card-panel hoverable">
+    <ul>
       <li><a href="/groups/{{group.id}}"><h4>{{ group.name }}</h4></a></li>
       <p>{{group.description}}</p>
         <h4>Activities:</h4>
         {% for a in activities %}
-        {% if group.id == a.group_id %}
+        {% if group.id == a.group_id and a.is_chosen %}
             <p><span style="font-weight: 500">{{ a.title }}</span></p>
             <p><span style="font-size: .75em">{{ a.description }}</span></p>
             <hr>
-
+    </div>
         {% endif %}
     {% endfor %}
         {% endfor %}
