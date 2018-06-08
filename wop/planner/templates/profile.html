@@ -12,10 +12,10 @@
           <p>{{group.description}}</p>
         </div>
         <div class="col s6">
-            <h4>Activities:</h4>
+            <h4>Your Next Activity:</h4>
             {% for a in activities %}
             {% if group.id == a.group_id and a.is_chosen %}
-                <p><span style="font-weight: 500">{{ a.title }}</span></p>
+                <p><span style="font-weight: 600">{{ a.title }}</span></p>
                 <p><span style="font-size: .75em">{{ a.description }}</span></p>
                 <hr>
         </div>    
