@@ -30,11 +30,34 @@ def profile(request):
 # ===
 
 def get_random_activity(request, pk):
+    reset_pool= None
     print('pk is', pk)
     group = Group.objects.get(id=pk)
     print('group is', group)
     pool = Activity.objects.filter(group_id=group).values().exclude(is_chosen=True)
-    reset_pool = Activity.objects.get(group_id=group, is_chosen=True)
+    try: 
+        reset_pool = Activity.objects.get(group_id=group, is_chosen=True)
+        print('it passed')
+    except:
+        pass
+        print('except')
+
+    # print('pool looks like this:', pool.count())
+    # print('reset_pool looks like this:', type(reset_pool))
+    if reset_pool and pool.count()==0:
+        return HttpResponseRedirect('/profile/')
+    elif pool.count()>=1 and not reset_pool:
+        print('1 false, 0 true')
+        new_pool = []
+        for id in pool:
+            new_pool.append(id['id'])
+        selected_index = new_pool[0]
+        selected_activity = Activity.objects.get(id=selected_index)
+        selected_activity.is_chosen=True
+        selected_activity.save(update_fields=['is_chosen'])
+        # return HttpResponseRedirect('/groups/'pk)
+        return HttpResponseRedirect('/profile')
+
     print('here is the reset_pool', reset_pool)
     reset_pool.is_chosen = False
     print('here is the reset_pool...reset...', reset_pool)
@@ -60,7 +83,8 @@ def get_random_activity(request, pk):
     print('made it TRUE', selected_activity)
     selected_activity.save(update_fields=['is_chosen'])
     # print('selected_activity after changing is_chosen', selected_activity)
-    return HttpResponseRedirect('/profile/')
+    # return HttpResponseRedirect('/groups/'pk)
+    return HttpResponseRedirect('/groups/%s' % pk)
 
 
 def activity_create(request, pk):
