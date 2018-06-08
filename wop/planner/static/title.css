@@ -1,8 +1,8 @@
 h1{
-  font-size: 400px;
+  font-size: 500px;
   position: absolute;
-      text-shadow: 5px -1px 9px #20579c;
 
+      text-shadow: 5px -1px 9px #20579c;
 }
 
 body{
@@ -10,12 +10,14 @@ body{
   width: -webkit-fill-available;
   background-image: url('title.jpeg');
 font-family: 'Archivo Narrow', sans-serif;
+}
 
+h4{
+  text-shadow: 5px -1px 9px #20579c;
 }
 
 h2{
       margin: 10px;
-
 }
 
 a { color: inherit; } 
