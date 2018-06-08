@@ -31,6 +31,9 @@ class User_Group(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.user.username
+
 # class Activity_Group(models.Model):
 #     group = models.ManyToManyField(Group, on_delete=models.CASCADE)
 #     activity = models.ManyToManyField(Activity, on_delete=models.CASCADE)

@@ -1,13 +1,14 @@
 {% load staticfiles %}
 
+
 <!DOCTYPE html>
 <html>
   <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>WOP</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Advent+Pro|Poor+Story" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
   </head>
   <body>
   <div class="navbar-fixed">
@@ -37,7 +38,6 @@
       <div class="container">
 
     {% block content %}
-    <script src="{% static 'main.js' %}"></script>
     {% endblock %}
       </div>
     <hr />
@@ -46,5 +46,7 @@
         All Rights Reserved, WOP 2018
     </footer>
 
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="{% static 'main.js' %}"></script>
   </body>
 </html>

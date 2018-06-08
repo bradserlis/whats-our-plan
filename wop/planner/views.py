@@ -114,7 +114,7 @@ def groups_detail(request, pk):
         print('it passed')
         print('it knew it was this group:', group)
         print(activities)
-    return render(request, "groups_detail.html", {'group':group, 'activities': activities, 'form':form, 'person_in_group': person_in_group})
+    return render(request, "groups_detail.html", {'group':group, 'group_users':group_users, 'activities': activities, 'form':form, 'person_in_group': person_in_group})
 
 def groups_join(request, pk):
     group = Group.objects.get(id=pk)

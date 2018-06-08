@@ -2,7 +2,7 @@
 {% load staticfiles %}
     {% block content %}
     <h2>Your Groups</h2>
-    <a href="/groups"><button class="waves-effect waves-light btn">Join Group</button></a>
+    <a href="/groups"><button class="waves-effect waves-light btn">Join New Group</button></a>
     {% if groups %}
     {% for group in groups %}
     <div class="card-panel hoverable profile-card col s12">
@@ -17,7 +17,6 @@
             {% if group.id == a.group_id and a.is_chosen %}
                 <p><span style="font-weight: 600">{{ a.title }}</span></p>
                 <p><span style="font-size: .75em">{{ a.description }}</span></p>
-                <hr>
         </div>    
     </div>
         {% endif %}
