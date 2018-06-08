@@ -3,5 +3,22 @@ h1{
   position: absolute;
 }
 
+body{
+  height:-webkit-fill-available;
+  width: -webkit-fill-available;
+  background-image: url('title.jpeg');
+font-family: 'Archivo Narrow', sans-serif;
+
+}
+
+h2{
+      margin: 10px;
+
+}
 
 a { color: inherit; } 
+
+button{
+      margin-top: 50%;
+
+}
