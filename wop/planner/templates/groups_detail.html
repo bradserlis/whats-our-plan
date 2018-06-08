@@ -16,7 +16,9 @@
       <h4>Your Next Activity:</h4>
           {% for a in activities %}
       {%if a.is_chosen%}
-      <p>{{ a.title }}</p>
+      <div class='activity_picked center-align'>
+        <p>{{ a.title }}</p>
+      </div>
       {% endif %}
       {% endfor %}
       <hr>
