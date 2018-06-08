@@ -95,8 +95,10 @@ class GroupsView(generic.ListView):
 
 def groups_detail(request, pk):
     group = Group.objects.get(id=pk)
-    group_users = User_Group.objects.filter(group=group).values()
+    group_users = User_Group.objects.filter(group=group).values('user_id')
     print('group_users:', group_users)
+    users = User.objects.filter(id__in=group_users)
+    print('users:', users)
     person_in_group = False
 
     for person in group_users:
@@ -114,7 +116,7 @@ def groups_detail(request, pk):
         print('it passed')
         print('it knew it was this group:', group)
         print(activities)
-    return render(request, "groups_detail.html", {'group':group, 'group_users':group_users, 'activities': activities, 'form':form, 'person_in_group': person_in_group})
+    return render(request, "groups_detail.html", {'group':group, 'users':users, 'group_users':group_users, 'activities': activities, 'form':form, 'person_in_group': person_in_group})
 
 def groups_join(request, pk):
     group = Group.objects.get(id=pk)
