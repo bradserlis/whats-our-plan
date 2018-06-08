@@ -3,8 +3,11 @@ url = "https://pypi.python.org/simple"
 verify_ssl = true
 
 [packages]
-django= "*"
-psycopg2="*"
+django = "*"
+gunicorn = "*"
+django-heroku = "*"
+django-cors-headers = "*"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.6.4"
