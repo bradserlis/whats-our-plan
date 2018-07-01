@@ -22,7 +22,6 @@ def profile(request):
     user = Profile.objects.get(user=request.user)
     groups = Group.objects.filter(users=user)
     activities = Activity.objects.filter(group__in=groups)
-    print(activities)
     return render(request, 'profile.html', {'groups':groups, 'activities': activities })
 
 # ===
@@ -96,9 +95,7 @@ class GroupsView(generic.ListView):
 def groups_detail(request, pk):
     group = Group.objects.get(id=pk)
     group_users = User_Group.objects.filter(group=group).values('user_id')
-    print('group_users:', group_users)
     users = User.objects.filter(id__in=group_users)
-    print('users:', users)
     person_in_group = False
 
     for person in group_users:

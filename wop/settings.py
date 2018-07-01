@@ -75,15 +75,15 @@ WSGI_APPLICATION = 'wop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': ('wop'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': ('wop'),
+    }
+}
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(default="postgres://jmepmmpnmuzapz:066e62e3713f879385dc0c2a20be500a4e836aaabe63cb9175632dea9c9b3a69@ec2-54-235-75-214.compute-1.amazonaws.com:5432/df5acil95dbr6r")
+# DATABASES = {}
+# DATABASES['default'] = dj_database_url.config(default="postgres://jmepmmpnmuzapz:066e62e3713f879385dc0c2a20be500a4e836aaabe63cb9175632dea9c9b3a69@ec2-54-235-75-214.compute-1.amazonaws.com:5432/df5acil95dbr6r")
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -121,4 +121,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+# ******* UNCOMMENT BELOW TO GO BACK TO DEPLOYMENT STATE    VVVV
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATIC_URL = '/static/'
+
+# ******* UNCOMMENT BELOW TO GO BACK TO DEPLOYMENT STATE VVVV
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
