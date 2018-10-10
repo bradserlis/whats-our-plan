@@ -26,7 +26,7 @@ SECRET_KEY = 'tolkw89ql--02mkd#7px+99j6bd7l=kb(qi#p6@kbef9@70_^p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['whatsourplan.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['whatsourplan.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -129,6 +129,6 @@ STATIC_URL = '/static/'
 
 # ******* UNCOMMENT BELOW TO GO BACK TO DEPLOYMENT STATE VVVV
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
