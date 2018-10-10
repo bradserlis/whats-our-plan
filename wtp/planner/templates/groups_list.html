@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+    {% block content %}
+
+{% if groups %}
+    <ul>
+    {% for group in groups %}
+<li><a href="/groups/{{group.id}}"><h4>{{ group.name }}</h4></a></li>
+      <p>{{group.description}}</p>
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No groups are available.</p>
+{% endif %}
+    <a href="/groups/form/"><button class="waves-effect waves-light btn">Add Group</button></a>
+
+    {% endblock %}
