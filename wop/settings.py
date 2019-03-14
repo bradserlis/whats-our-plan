@@ -72,18 +72,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'wop.wsgi.application'
 
 
+# database dev
+
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': ('wop'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': ('wop'),
+#     }
+# }
 
-# DATABASES = {}
-# DATABASES['default'] = dj_database_url.config(default="postgres://jmepmmpnmuzapz:066e62e3713f879385dc0c2a20be500a4e836aaabe63cb9175632dea9c9b3a69@ec2-54-235-75-214.compute-1.amazonaws.com:5432/df5acil95dbr6r")
+# database Prod
+
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(default="postgres://jmepmmpnmuzapz:066e62e3713f879385dc0c2a20be500a4e836aaabe63cb9175632dea9c9b3a69@ec2-54-235-75-214.compute-1.amazonaws.com:5432/df5acil95dbr6r")
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
