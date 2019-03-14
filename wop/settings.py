@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'tolkw89ql--02mkd#7px+99j6bd7l=kb(qi#p6@kbef9@70_^p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['whatsourplan.herokuapp.com', 'whats-our-plan.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'http://whitenoise.evans.io/en/stable/django.html',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -127,7 +128,9 @@ USE_TZ = True
 
 # ******* UNCOMMENT BELOW TO GO BACK TO DEPLOYMENT STATE    VVVV
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
 
@@ -135,4 +138,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'planner/static'),
+    os.path.join(BASE_DIR, 'planner'),
 )
