@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'wop.wsgi.application'
 # Database Prod
 
 DATABASES = {}
-DATABASES['default'] = dj_database_url.config(default="postgres://jmepmmpnmuzapz:066e62e3713f879385dc0c2a20be500a4e836aaabe63cb9175632dea9c9b3a69@ec2-54-235-75-214.compute-1.amazonaws.com:5432/df5acil95dbr6r")
+DATABASES['default'] = dj_database_url.config(default="postgres://tcbqxylabmnsbn:ae83214e3934e931a714f8e276428e8da1b39a1434c86cc50f69d6834ce85377@ec2-50-19-109-120.compute-1.amazonaws.com:5432/ddh5qfbuv0lbjj")
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
