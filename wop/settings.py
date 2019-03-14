@@ -137,5 +137,5 @@ STATIC_URL = '/static/'
 # ******* UNCOMMENT BELOW TO GO BACK TO DEPLOYMENT STATE VVVV
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'planner/static'),
+    os.path.join(BASE_DIR, './planner/static'),
 )
