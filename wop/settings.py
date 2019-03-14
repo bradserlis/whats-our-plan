@@ -132,12 +132,10 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATIC_URL = '/planner/static/'
+STATIC_URL = '/static/'
 
 # ******* UNCOMMENT BELOW TO GO BACK TO DEPLOYMENT STATE VVVV
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'planner/static'),
-    os.path.join(BASE_DIR, 'planner'),
 )
