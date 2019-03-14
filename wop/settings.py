@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['whatsourplan.herokuapp.com', 'whats-our-plan.herokuapp.com', '
 # Application definition
 
 INSTALLED_APPS = [
+'whitenoise.runserver_nostatic',
     'wop.planner',
     'django.contrib.admin',
     'django.contrib.auth',
