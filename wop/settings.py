@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import dj_database_url
+# import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -80,17 +80,17 @@ WSGI_APPLICATION = 'wop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': ('wop'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': ('wop'),
+    }
+}
 
 # Database Prod
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(default="postgres://tcbqxylabmnsbn:ae83214e3934e931a714f8e276428e8da1b39a1434c86cc50f69d6834ce85377@ec2-50-19-109-120.compute-1.amazonaws.com:5432/ddh5qfbuv0lbjj")
+# DATABASES = {}
+# DATABASES['default'] = dj_database_url.config(default="postgres://tcbqxylabmnsbn:ae83214e3934e931a714f8e276428e8da1b39a1434c86cc50f69d6834ce85377@ec2-50-19-109-120.compute-1.amazonaws.com:5432/ddh5qfbuv0lbjj")
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -138,6 +138,6 @@ STATIC_URL = '/static/'
 
 # ******* UNCOMMENT BELOW TO GO BACK TO DEPLOYMENT STATE VVVV
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, './wop/planner/static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, './wop/planner/static'),
+# )
